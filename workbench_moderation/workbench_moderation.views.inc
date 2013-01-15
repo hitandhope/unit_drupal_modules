@@ -211,23 +211,3 @@ function workbench_moderation_views_data() {
 
   return $data;
 }
-
-
-/**
- * If this is the workbench_moderation view, then change the join so that information from the node table is always returned.
- *
- * @see http://drupal.org/node/1845138
- *
- * @param view $view
- *   Current view
- * @param views_plugin_query_default $query
- *   Current query
- *
- */
-function workbench_moderation_views_query_alter(&$view, &$query) {
-  if ($view->name == 'workbench_moderation') {
-    $query->table_queue['node_node_revision']['join']->left_field
-      = $query->table_queue['node_node_revision']['join']->field
-        = 'nid';
-  }
-}
